@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Climax</string>
+
+    <string name="next">بعدی</string>
+    <string name="skip">خروج</string>
+    <string name="start">فهمیدم</string>
+
+    <string name="slide_1_title">سلام عزیزم!</string>
+    <string name="slide_1_desc">پیور سافت راحتی و سرعت و امنیت رو برای شما فراهم کرده</string>
+
+    <string name="slide_2_title">اوج</string>
+    <string name="slide_2_desc">با اوج از هرکجا که هستی می تونی به انبار های شرکت نظارت داشته باشی</string>
+
+</resources>
