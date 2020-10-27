@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,33 +28,31 @@ public class JsonReceiver {
 
     public void post(final Map<String, String> map, int requestMethod) {
 
-        try {
-            //show progress until to load data form server
-            show_progress();
-            queue = Volley.newRequestQueue(context);
-            request = new StringRequest(requestMethod, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    progressBar.dismiss();
-                    //this interface callback the result to main activity
-                    ((GeneralCallback) context).VolleyResponse(response);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressBar.dismiss();
-                    Toast.makeText(context, "user name or password is not correct!\n"+error.toString(), Toast.LENGTH_LONG).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    return map;
-                }
-            };
-            queue.add(request);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+        //show progress until to load data form server
+        show_progress();
+        queue = Volley.newRequestQueue(context);
+        request = new StringRequest(requestMethod, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressBar.dismiss();
+                //this interface callback the result to main activity
+                ((GeneralCallback) context).VolleyResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.dismiss();
+                ((GeneralCallback) context).VolleyResponse("user name or password is not correct!");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                return map;
+            }
+        };
+        queue.add(request);
+
 
     }
 
