@@ -2,6 +2,7 @@ package puresoft.org.climax;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,10 +35,7 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
         setContentView(R.layout.activity_login);
 
         Login();
-
         RememberDataLogin();
-
-
 
     }
 
@@ -45,12 +43,17 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
     //this interface callback the result to main activity
     @Override
     public void VolleyResponse(String data) {
-        if (data.equals("user name or password is not correct!"))
-        {
-            Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
+
+//        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
+        if (data.equals("user name or password is not correct!")) {
             email.getText().clear();
             password.getText().clear();
             saveCheck.setChecked(false);
+        } else {
+            new SharedPreference_Auth(getApplicationContext()).saveDetail(data);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -66,15 +69,31 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
             public void onClick(View v) {
 
 
-                JsonReceiver jsonReceiver = new JsonReceiver(activity, "https://puresoftware.org/user/en/oauth2/access/token.json");
                 if (!(password.getText().toString().equals(null) || password.getText().toString().equals("")) &&
                         !(email.getText().toString().equals(null) || email.getText().toString().equals(""))) {
-                    Map<String, String> parser = new HashMap<String, String>();
-                    parser.put("grant_type", "password");
-                    parser.put("username", email.getText().toString());
-                    parser.put("password", password.getText().toString());
-                    parser.put("scope", "climax");
-                    jsonReceiver.post(parser, Request.Method.POST);
+
+
+                    //check the auth data saved
+                    if (new SharedPreference_Auth(getApplicationContext()).IsExpired()) {
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+//                   SharedPreference_Auth sharedPreference_auth=new SharedPreference_Auth(getApplicationContext());
+//                   Toast.makeText(getApplicationContext(), sharedPreference_auth.getAuth(), Toast.LENGTH_LONG).show();
+
+
+                    } else {
+                        JsonReceiver jsonReceiver = new JsonReceiver(activity, "https://puresoftware.org/user/en/oauth2/access/token.json");
+                        Map<String, String> parser = new HashMap<String, String>();
+                        parser.put("grant_type", "password");
+                        parser.put("username", email.getText().toString());
+                        parser.put("password", password.getText().toString());
+                        parser.put("scope", "climax");
+                        jsonReceiver.post(parser, Request.Method.POST);
+                    }
+
                 } else
                     Toast.makeText(getApplicationContext(), "please fill text boxes", Toast.LENGTH_LONG).show();
 
@@ -98,13 +117,11 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
         saveCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     sharedPreference_login.saveDetail(email.getText().toString(), password.getText().toString());
 
-                }else
-                {
-                    if (sharedPreference_login.IsSaved()){
+                } else {
+                    if (sharedPreference_login.IsSaved()) {
                         sharedPreference_login.removeDetails();
                     }
                 }
