@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
                         parser.put("username", email.getText().toString());
                         parser.put("password", password.getText().toString());
                         parser.put("scope", "climax");
-                        jsonReceiver.post(parser, Request.Method.POST);
+                        jsonReceiver.post(parser);
                     }
 
                 } else
