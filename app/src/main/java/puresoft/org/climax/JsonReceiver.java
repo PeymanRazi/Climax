@@ -50,7 +50,20 @@ public class JsonReceiver {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressBar.dismiss();
-                ((GeneralCallback) context).VolleyResponse("user name or password is not correct!");
+                String errors = "";
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    errors = "time out";
+                } else if (error instanceof AuthFailureError) {
+                    errors = "AuthFailureError";
+                } else if (error instanceof ServerError) {
+                    errors = "ServerError";
+                } else if (error instanceof NetworkError) {
+                    errors = "NetworkError";
+                } else if (error instanceof ParseError) {
+                    errors = "ParseError";
+                }
+                ((GeneralCallback) context).VolleyResponse( errors);
             }
         }) {
             @Override

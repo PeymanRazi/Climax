@@ -1,6 +1,7 @@
 package puresoft.org.climax;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,9 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.climaxlogo);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Login();
         RememberDataLogin();
@@ -44,17 +48,23 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
     @Override
     public void VolleyResponse(String data) {
 
-//        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
-        if (data.equals("user name or password is not correct!")) {
-            email.getText().clear();
-            password.getText().clear();
-            saveCheck.setChecked(false);
-        } else {
-            new SharedPreference_Auth(getApplicationContext()).saveDetail(data);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
+   try {
+       if (data.equals("time out")) {
+           Toast.makeText(getApplicationContext(), data+" check Internet connection!", Toast.LENGTH_LONG).show();
+           email.getText().clear();
+           password.getText().clear();
+           saveCheck.setChecked(false);
+
+       } else {
+           new SharedPreference_Auth(getApplicationContext()).saveDetail(data);
+           Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+           startActivity(intent);
+           finish();
+       }
+   }catch (Exception e){
+       e.printStackTrace();
+   }
     }
 
 

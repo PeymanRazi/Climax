@@ -11,4 +11,6 @@
     <string name="slide_2_title">اوج</string>
     <string name="slide_2_desc">با اوج از هرکجا که هستی می تونی به انبار های شرکت نظارت داشته باشی</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
