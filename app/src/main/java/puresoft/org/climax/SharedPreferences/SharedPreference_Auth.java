@@ -1,4 +1,4 @@
-package puresoft.org.climax;
+package puresoft.org.climax.SharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,7 +13,7 @@ public class SharedPreference_Auth {
     private SharedPreferences.Editor editor;
     private Context context;
 
-    SharedPreference_Auth(Context context) {
+    public SharedPreference_Auth(Context context) {
         this.context = context;
         pref = context.getSharedPreferences("authentication data", Context.MODE_PRIVATE);
         editor = pref.edit();

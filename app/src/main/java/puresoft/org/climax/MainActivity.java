@@ -1,28 +1,23 @@
 package puresoft.org.climax;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import puresoft.org.climax.Interfaces.GeneralCallback;
+import puresoft.org.climax.SharedPreferences.SharedPreferences_Splash;
 import puresoft.org.climax.ViewPagerClasses.PagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity implements GeneralCallback {
 
-    Activity activity;
-    String resultApi;
     ViewPager viewPager;
     TabLayout tabLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +31,23 @@ public class MainActivity extends AppCompatActivity implements GeneralCallback {
         //shared preference of splash
         Splash();
 
+
         //viewpager set up
         ViewPagerOperation();
 
 
     }
 
+
     //this interface method receive the result of JsonReceiver and store it to resultApi variable
     @Override
     public void VolleyResponse(String data) {
 
-        resultApi = data;
-        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
+        //send date to fragment with BroadCast
+        Intent intent = new Intent("STRING_ID_FOR_BRODCAST");
+        intent.putExtra("key",data);
+        sendBroadcast(intent);
+
     }
 
 
@@ -58,23 +58,6 @@ public class MainActivity extends AppCompatActivity implements GeneralCallback {
             prefManager.setFirstTimeLaunch(false);
             startActivity(new Intent(MainActivity.this, Splash_Welcome.class));
             finish();
-        }
-    }
-
-    //get data api
-    private void GetDataApi() {
-
-        activity = this;
-
-        try {
-            JsonReceiver jsonReceiver = new JsonReceiver(activity, "https://puresoftware.org/climax/en/api-v1/my-accesses.json");
-            Map<String, String> parser = new HashMap<String, String>();
-            String auth = new SharedPreference_Auth(getApplicationContext()).getAuth();
-            auth = "Bearer " + auth;
-            parser.put("Authorization", auth);
-            jsonReceiver.get(parser);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

@@ -1,4 +1,4 @@
-package puresoft.org.climax;
+package puresoft.org.climax.SharedPreferences;
 
 /**
  * Created by Peyman Razi on 22/07/2019.

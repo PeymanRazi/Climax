@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import puresoft.org.climax.SharedPreferences.SharedPreferences_Splash;
+
 public class Splash_Welcome extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -48,10 +50,10 @@ public class Splash_Welcome extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash__welcome);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnNext = (Button) findViewById(R.id.btn_next);
+        viewPager = findViewById(R.id.view_pager);
+        dotsLayout = findViewById(R.id.layoutDots);
+        btnSkip = findViewById(R.id.btn_skip);
+        btnNext = findViewById(R.id.btn_next);
 
 
         // layouts of welcome sliders

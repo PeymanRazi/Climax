@@ -1,7 +1,6 @@
 package puresoft.org.climax;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,17 +9,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.android.volley.Request;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import puresoft.org.climax.Interfaces.GeneralCallback;
+
+import puresoft.org.climax.ServerConnection.JsonReceiver;
+import puresoft.org.climax.SharedPreferences.SharedPreference_Auth;
+import puresoft.org.climax.SharedPreferences.SharedPreference_Login;
+
 
 public class LoginActivity extends AppCompatActivity implements GeneralCallback {
 

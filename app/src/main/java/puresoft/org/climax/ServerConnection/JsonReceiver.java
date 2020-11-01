@@ -1,10 +1,9 @@
-package puresoft.org.climax;
+package puresoft.org.climax.ServerConnection;
 
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -20,6 +19,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Map;
 
+import puresoft.org.climax.Interfaces.GeneralCallback;
+
 public class JsonReceiver {
     private RequestQueue queue;
     private StringRequest request;
@@ -27,7 +28,7 @@ public class JsonReceiver {
     private String url;
     private ProgressDialog progressBar;
 
-    JsonReceiver(Activity activity, String url) {
+   public JsonReceiver(Activity activity, String url) {
         this.context = activity;
         this.url = url;
     }
