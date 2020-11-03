@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-Climax.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-Climax.iml" group="Climax" />
       <module fileurl="file://$PROJECT_DIR$/Climax.iml" filepath="$PROJECT_DIR$/Climax.iml" group="Climax" />
+      <module fileurl="file://$PROJECT_DIR$/app/Climax-app.iml" filepath="$PROJECT_DIR$/app/Climax-app.iml" group="Climax/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Climax/app" />
     </modules>
   </component>
