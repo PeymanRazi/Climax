@@ -23,6 +23,7 @@ import puresoft.org.climax.Interfaces.GeneralCallback;
 import puresoft.org.climax.ServerConnection.JsonReceiver;
 import puresoft.org.climax.SharedPreferences.SharedPreference_Auth;
 import puresoft.org.climax.SharedPreferences.SharedPreference_Login;
+import puresoft.org.climax.SharedPreferences.SharedPreferences_Splash;
 
 
 public class LoginActivity extends AppCompatActivity implements GeneralCallback {
@@ -40,6 +41,8 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.climaxlogo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //shared preference of splash
+        Splash();
 
         Login();
         RememberDataLogin();
@@ -143,4 +146,14 @@ public class LoginActivity extends AppCompatActivity implements GeneralCallback 
 
     }
 
+
+    //shared preference of splash
+    private void Splash() {
+        SharedPreferences_Splash prefManager = new SharedPreferences_Splash(getApplicationContext());
+        if (prefManager.isFirstTimeLaunch()) {
+            prefManager.setFirstTimeLaunch(false);
+            startActivity(new Intent(LoginActivity.this, Splash_Welcome.class));
+            finish();
+        }
+    }
 }

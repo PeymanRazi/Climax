@@ -28,10 +28,6 @@ public class MainActivity extends AppCompatActivity implements GeneralCallback {
         getSupportActionBar().setTitle("");
 
 
-        //shared preference of splash
-        Splash();
-
-
         //viewpager set up
         ViewPagerOperation();
 
@@ -51,15 +47,6 @@ public class MainActivity extends AppCompatActivity implements GeneralCallback {
     }
 
 
-    //shared preference of splash
-    private void Splash() {
-        SharedPreferences_Splash prefManager = new SharedPreferences_Splash(getApplicationContext());
-        if (prefManager.isFirstTimeLaunch()) {
-            prefManager.setFirstTimeLaunch(false);
-            startActivity(new Intent(MainActivity.this, Splash_Welcome.class));
-            finish();
-        }
-    }
 
     //viewpager set up
     private void ViewPagerOperation() {
