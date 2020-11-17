@@ -1,4 +1,4 @@
-package puresoft.org.climax.ViewPagerClasses;
+package puresoft.org.climax.viewes;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

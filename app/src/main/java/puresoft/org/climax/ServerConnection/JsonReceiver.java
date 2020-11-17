@@ -1,7 +1,6 @@
 package puresoft.org.climax.ServerConnection;
 
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 
@@ -19,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Map;
 
-import puresoft.org.climax.Interfaces.GeneralCallback;
+
 
 public class JsonReceiver {
     private RequestQueue queue;
@@ -28,13 +27,13 @@ public class JsonReceiver {
     private String url;
     private ProgressDialog progressBar;
 
-   public JsonReceiver(Activity activity, String url) {
-        this.context = activity;
+    public JsonReceiver(Context context, String url) {
+        this.context = context;
         this.url = url;
     }
 
     //this method used for post the data to the server
-    public void post(final Map<String, String> map) {
+    public void post(final Map<String, String> map, LambdaMethod myInterFace) {
 
 
         //show progress until to load data form server
@@ -44,8 +43,9 @@ public class JsonReceiver {
             @Override
             public void onResponse(String response) {
                 progressBar.dismiss();
-                //this interface callback the result to main activity
-                ((GeneralCallback) context).VolleyResponse(response);
+
+                myInterFace.processJson(response);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -64,7 +64,7 @@ public class JsonReceiver {
                 } else if (error instanceof ParseError) {
                     errors = "ParseError";
                 }
-                ((GeneralCallback) context).VolleyResponse( errors);
+                myInterFace.processJson(errors);
             }
         }) {
             @Override
@@ -78,7 +78,7 @@ public class JsonReceiver {
     }
 
     //this method used for get the data from the server
-    public void get(final Map<String, String> map) {
+    public void get(final Map<String, String> map,LambdaMethod myInterFace) {
 
 
         //show progress until to load data form server
@@ -88,8 +88,9 @@ public class JsonReceiver {
             @Override
             public void onResponse(String response) {
                 progressBar.dismiss();
-                //this interface callback the result to main activity
-                ((GeneralCallback) context).VolleyResponse(response);
+
+                myInterFace.processJson(response);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -100,15 +101,15 @@ public class JsonReceiver {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     errors = "time out";
                 } else if (error instanceof AuthFailureError) {
-                    errors = "AuthFailureError";
+                    errors = "user name or password is not correct!!!";
                 } else if (error instanceof ServerError) {
                     errors = "ServerError";
                 } else if (error instanceof NetworkError) {
-                    errors = "NetworkError";
+                    errors = "please check internet connection!!!";
                 } else if (error instanceof ParseError) {
                     errors = "ParseError";
                 }
-                ((GeneralCallback) context).VolleyResponse( errors);
+                myInterFace.processJson(errors);
             }
         }) {
             @Override
@@ -124,9 +125,13 @@ public class JsonReceiver {
 
     //show progress until to load data form server
     private void show_progress() {
-        progressBar = new ProgressDialog(context);
-        progressBar.setTitle("please waite...");
-        progressBar.setMessage("catching data");
-        progressBar.show();
+        try {
+            progressBar = new ProgressDialog(context);
+            progressBar.setTitle("please waite...");
+            progressBar.setMessage("catching data");
+            progressBar.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

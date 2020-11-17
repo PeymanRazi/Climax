@@ -1,4 +1,4 @@
-package puresoft.org.climax;
+package puresoft.org.climax.viewes;
 
 
 import android.os.Bundle;
@@ -20,9 +20,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import puresoft.org.climax.SharedPreferences.SharedPreferences_Splash;
+import puresoft.org.climax.R;
+import puresoft.org.climax.model.SharedPreferences_Splash;
 
-public class Splash_Welcome extends AppCompatActivity {
+public class ActivityWelcome extends AppCompatActivity {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -120,7 +121,7 @@ public class Splash_Welcome extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(Splash_Welcome.this, LoginActivity.class));
+        startActivity(new Intent(ActivityWelcome.this, ActivityLogin.class));
         finish();
     }
 

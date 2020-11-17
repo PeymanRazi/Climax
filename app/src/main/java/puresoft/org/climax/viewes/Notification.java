@@ -1,4 +1,4 @@
-package puresoft.org.climax.ViewPagerClasses;
+package puresoft.org.climax.viewes;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +24,7 @@ import puresoft.org.climax.POJO.POJONotification;
 import puresoft.org.climax.RecyclerViewClasses.RecyclerAdapter;
 import puresoft.org.climax.ServerConnection.JsonReceiver;
 import puresoft.org.climax.R;
-import puresoft.org.climax.SharedPreferences.SharedPreference_Auth;
+import puresoft.org.climax.model.SharedPreference_Auth;
 
 public class Notification extends Fragment {
     View view;
@@ -37,10 +36,10 @@ public class Notification extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_notification, container, false);
 
-        //get data api
-        GetDataApi();
-        //operating on received dataApi
-        OperationOnDataApi();
+//        //get data api
+//        GetDataApi();
+//        //operating on received dataApi
+//        OperationOnDataApi();
 
         return view;
     }
@@ -67,16 +66,16 @@ public class Notification extends Fragment {
     //get data api
     private void GetDataApi() {
 
-        try {
-            JsonReceiver jsonReceiver = new JsonReceiver((Activity) getContext(), "https://puresoftware.org/climax/en/api-v1/notifications.json");
-            Map<String, String> parser = new HashMap<String, String>();
-            String auth = new SharedPreference_Auth(getContext()).getAuth();
-            auth = "Bearer " + auth;
-            parser.put("Authorization", auth);
-            jsonReceiver.get(parser);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            JsonReceiver jsonReceiver = new JsonReceiver((Activity) getContext(), "https://puresoftware.org/climax/en/api-v1/notifications.json");
+//            Map<String, String> parser = new HashMap<String, String>();
+//            String auth = new SharedPreference_Auth(getContext()).getAuth();
+//            auth = "Bearer " + auth;
+//            parser.put("Authorization", auth);
+//            jsonReceiver.get(parser,);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 

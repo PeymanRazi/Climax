@@ -1,4 +1,4 @@
-package puresoft.org.climax.ViewPagerClasses;
+package puresoft.org.climax.viewes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import puresoft.org.climax.R;
 
-public class Stuffs extends Fragment {
+public class Persons extends Fragment {
     View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view=inflater.inflate(R.layout.fragment_stuff,container,false);
+        view=inflater.inflate(R.layout.fragment_persons,container,false);
 
 
 

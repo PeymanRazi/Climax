@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="puresoft.org.climax.Splash_Welcome">
+    tools:context="puresoft.org.climax.viewes.ActivityWelcome">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

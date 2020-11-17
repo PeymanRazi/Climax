@@ -1,4 +1,4 @@
-package puresoft.org.climax;
+package puresoft.org.climax.viewes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +8,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import puresoft.org.climax.Interfaces.GeneralCallback;
-import puresoft.org.climax.SharedPreferences.SharedPreferences_Splash;
-import puresoft.org.climax.ViewPagerClasses.PagerAdapter;
+import puresoft.org.climax.R;
 
 
-public class MainActivity extends AppCompatActivity implements GeneralCallback {
+public class ActivityMain extends AppCompatActivity   {
 
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -35,16 +33,7 @@ public class MainActivity extends AppCompatActivity implements GeneralCallback {
     }
 
 
-    //this interface method receive the result of JsonReceiver and store it to resultApi variable
-    @Override
-    public void VolleyResponse(String data) {
 
-        //send date to fragment with BroadCast
-        Intent intent = new Intent("STRING_ID_FOR_BRODCAST");
-        intent.putExtra("key",data);
-        sendBroadcast(intent);
-
-    }
 
 
 

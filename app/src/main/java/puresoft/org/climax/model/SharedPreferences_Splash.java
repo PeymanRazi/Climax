@@ -1,4 +1,4 @@
-package puresoft.org.climax.SharedPreferences;
+package puresoft.org.climax.model;
 
 /**
  * Created by Peyman Razi on 22/07/2019.

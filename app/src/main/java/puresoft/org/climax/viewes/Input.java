@@ -1,4 +1,4 @@
-package puresoft.org.climax.ViewPagerClasses;
+package puresoft.org.climax.viewes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

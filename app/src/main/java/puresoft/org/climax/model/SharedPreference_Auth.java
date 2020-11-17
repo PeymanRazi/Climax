@@ -1,4 +1,4 @@
-package puresoft.org.climax.SharedPreferences;
+package puresoft.org.climax.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,27 +20,36 @@ public class SharedPreference_Auth {
     }
 
     //save auth json
-    public void saveDetail(String json) {
+    public boolean saveDetail(String json) {
 
         JSONObject jsonObject = null;
+        boolean isJson = false;
+
         try {
+
             jsonObject = new JSONObject(json);
 
-            editor.putString("token_type", jsonObject.getString("token_type"));
-            editor.putString("access_token", jsonObject.getString("access_token"));
-            editor.putString("refresh_token", jsonObject.getString("refresh_token"));
-            //set time expire
-            String expire = jsonObject.getString("expires_in");
-            long end = System.currentTimeMillis() + (Integer.valueOf(expire)*1000);
-            editor.putString("expires_in", String.valueOf(end));
-            editor.commit();
+            //if json has requested authentication data then saving those
+            if (jsonObject.getString("token_type").equals("bearer")) {
+
+                isJson = true;
+
+                editor.putString("token_type", jsonObject.getString("token_type"));
+                editor.putString("access_token", jsonObject.getString("access_token"));
+                editor.putString("refresh_token", jsonObject.getString("refresh_token"));
+                //set time expire
+                String expire = jsonObject.getString("expires_in");
+                long end = System.currentTimeMillis() + (Integer.valueOf(expire) * 1000);
+                editor.putString("expires_in", String.valueOf(end));
+                editor.commit();
+            }
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
+        return isJson;
     }
 
     public boolean IsExpired() {
@@ -62,13 +71,15 @@ public class SharedPreference_Auth {
 
         return pref.getString("access_token", "");
     }
+
     public String getAuthRefresh() {
 
         return pref.getString("refresh_token", "");
     }
+
     public long getAuthTime() {
 
-        long beTime=Long.valueOf(pref.getString("access_token", ""))-System.currentTimeMillis();
+        long beTime = Long.valueOf(pref.getString("access_token", "")) - System.currentTimeMillis();
 
 
         return beTime;

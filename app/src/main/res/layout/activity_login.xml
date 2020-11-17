@@ -1,83 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="LoginViewModel"
+            type="puresoft.org.climax.view_model.Login" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="148dp"
-        android:text="sign in"
-        android:layout_marginRight="160dp"
-        android:layout_alignParentRight="true"/>
+    </data>
 
-    <EditText
-        android:id="@+id/emailTxt"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="199dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:hint="climax@yahoo.com"
-        android:inputType="textPersonName"
-        android:layout_alignParentRight="true" />
-    <EditText
-        android:id="@+id/passwordTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailTxt"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
-        android:layout_alignParentRight="true" />
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/loginBtn"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="358dp"
-        android:textColor="@android:color/black"
-        android:text="Enter Email"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp" />
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="428dp"
-        android:text="Enter Password"
-        android:textColor="@android:color/black"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp" />
-    <CheckBox
-        android:id="@+id/checkSaveLogin"
-        android:layout_width="184dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/loginBtn"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="192dp"
-        android:layout_marginBottom="88dp"
-        android:text="remember me"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="192dp" />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        tools:context=".viewes.ActivityMain">
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="160dp"
+            android:layout_marginBottom="148dp"
+            android:text="sign in"
+            android:layout_marginRight="160dp"
+            android:layout_alignParentRight="true"
+            android:onClick="@{()->LoginViewModel.onClicked(checkSaveLogin,emailTxt,passwordTxt)}"/>
+
+        <EditText
+            android:id="@+id/emailTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="199dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="climax@yahoo.com"
+            android:inputType="textPersonName"
+            android:layout_alignParentRight="true"
+            android:text="@{LoginViewModel.email}"/>
+        <EditText
+            android:id="@+id/passwordTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/emailTxt"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="67dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:layout_alignParentRight="true"
+            android:text="@{LoginViewModel.password}"/>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/loginBtn"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="358dp"
+            android:textColor="@android:color/black"
+            android:text="Enter Email"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="428dp"
+            android:text="Enter Password"
+            android:textColor="@android:color/black"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp" />
+        <CheckBox
+            android:id="@+id/checkSaveLogin"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/loginBtn"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="192dp"
+            android:layout_marginBottom="88dp"
+            android:text="remember me"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="192dp"
+            android:checked="@{LoginViewModel.check}"
+            android:onClick="@{()->LoginViewModel.onChecked(checkSaveLogin,emailTxt,passwordTxt)}"
+            />
+    </RelativeLayout>
+
+</layout>
+
+
